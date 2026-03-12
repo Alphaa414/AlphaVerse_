@@ -1,0 +1,2833 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Alpha Verse LMS</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+/* GLOBAL */
+
+body{
+
+margin:0;
+
+font-family:Arial,Helvetica,sans-serif;
+
+background:#f4f6fb;
+
+}
+
+/* HEADER */
+
+header{
+
+background:#111;
+
+color:white;
+
+padding:15px 40px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+position:sticky;
+
+top:0;
+
+z-index:999;
+
+}
+
+.logo{
+
+font-size:22px;
+
+font-weight:bold;
+
+}
+
+nav a{
+
+color:white;
+
+text-decoration:none;
+
+margin:0 15px;
+
+font-size:15px;
+
+}
+
+.social i{
+
+margin-left:10px;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+/* HERO */
+
+.hero{
+
+height:80vh;
+
+background:linear-gradient(120deg,#6a5acd,#3a0ca3);
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:center;
+
+color:white;
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:50px;
+
+margin-bottom:10px;
+
+}
+
+.hero p{
+
+font-size:20px;
+
+}
+
+.hero button{
+
+margin-top:20px;
+
+padding:12px 25px;
+
+border:none;
+
+background:#00c3ff;
+
+color:white;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+/* COURSE GRID */
+
+.section-title{
+
+text-align:center;
+
+font-size:35px;
+
+margin-top:60px;
+
+}
+
+.courses{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+gap:25px;
+
+padding:40px;
+
+}
+
+.course{
+
+background:white;
+
+border-radius:12px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+
+overflow:hidden;
+
+}
+
+.course img{
+
+width:100%;
+
+height:170px;
+
+object-fit:cover;
+
+}
+
+.course-content{
+
+padding:20px;
+
+text-align:center;
+
+}
+
+.course button{
+
+margin-top:10px;
+
+padding:10px 18px;
+
+border:none;
+
+background:#6a5acd;
+
+color:white;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+/* BATCH PAGE */
+
+.batch-page{
+
+display:none;
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.batch-box{
+
+background:white;
+
+padding:40px;
+
+margin:20px auto;
+
+max-width:500px;
+
+border-radius:10px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+/* SUBJECT PAGE */
+
+.subject-page{
+
+display:none;
+
+padding:60px;
+
+}
+
+.subject{
+
+background:#eef2ff;
+
+padding:20px;
+
+margin:10px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+/* CHAPTER PAGE */
+
+.chapter-page{
+
+display:none;
+
+padding:60px;
+
+}
+
+.chapter{
+
+background:#e6f0ff;
+
+padding:15px;
+
+margin:10px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+/* TOPIC PAGE */
+
+.topic-page{
+
+display:none;
+
+padding:60px;
+
+}
+
+.topic{
+
+background:#f0f4ff;
+
+padding:12px;
+
+margin:8px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+/* LESSON */
+
+.lesson-page{
+
+display:none;
+
+padding:40px;
+
+text-align:center;
+
+}
+
+video{
+
+width:80%;
+
+border-radius:10px;
+
+}
+
+/* LOGIN */
+
+.login-modal{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,0.6);
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.login-box{
+
+background:white;
+
+padding:30px;
+
+border-radius:10px;
+
+width:300px;
+
+}
+
+.login-box input{
+
+width:100%;
+
+padding:10px;
+
+margin:10px 0;
+
+}
+
+/* TELEGRAM */
+
+.telegram{
+
+text-align:center;
+
+margin:60px;
+
+}
+
+.telegram button{
+
+background:#0088cc;
+
+color:white;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:6px;
+
+}
+
+/* FOOTER */
+
+footer{
+
+background:#111;
+
+color:white;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<i class="fa-solid fa-graduation-cap"></i> Alpha Verse
+
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+
+<a href="#courses">Courses</a>
+
+<a onclick="openLogin()">Login</a>
+
+</nav>
+
+<div class="social">
+
+<a href="#"><i class="fa-brands fa-telegram"></i></a>
+
+<a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+<a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>Learn From India's Best Teachers</h1>
+
+<h2>Boards • JEE • NEET Preparation</h2>
+
+<button onclick="scrollCourses()">Explore Courses</button>
+
+</section>
+
+<h2 class="section-title" id="courses">Popular Courses</h2>
+
+<div class="courses">
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?1">
+
+<div class="course-content">
+
+<h3>Class 10</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?2">
+
+<div class="course-content">
+
+<h3>Class 11 Science</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?3">
+
+<div class="course-content">
+
+<h3>Class 11 Maths</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?4">
+
+<div class="course-content">
+
+<h3>Class 11 Commerce</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?5">
+
+<div class="course-content">
+
+<h3>Class 12 Maths</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?6">
+
+<div class="course-content">
+
+<h3>Class 12 Science</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+<div class="course">
+
+<img src="https://picsum.photos/400/200?7">
+
+<div class="course-content">
+
+<h3>Class 12 Commerce</h3>
+
+<button onclick="openBatch()">Let's Study</button>
+
+</div>
+
+</div>
+
+</div>
+  
+  
+<!-- BATCH PAGE -->
+
+<section class="batch-page" id="batchPage">
+
+<h1>Select Your Batch</h1>
+
+<div class="batch-box">
+
+<h2>PW Batch</h2>
+
+<p>Complete syllabus preparation </p>
+
+<button onclick="openSubjects()">Study</button>
+
+</div>
+
+<div class="batch-box">
+
+<h2>NEXT Toppers Batch</h2>
+
+<p>Advanced preparation with top faculty</p>
+
+<button onclick="openSubjects()">Study</button>
+
+</div>
+
+</section>
+
+
+
+<!-- SUBJECT PAGE -->
+
+<section class="subject-page" id="subjectPage">
+
+<h1>Select Subject</h1>
+
+<div class="subject" onclick="openChapters()">
+<i class="fa-solid fa-square-root-variable"></i>
+Mathematics
+</div>
+
+<div class="subject" onclick="openChapters()">
+<i class="fa-solid fa-flask"></i>
+Science
+</div>
+
+<div class="subject" onclick="openChapters()">
+<i class="fa-solid fa-book"></i>
+English
+</div>
+
+<div class="subject" onclick="openChapters()">
+<i class="fa-solid fa-globe"></i>
+Social Science
+</div>
+
+</section>
+
+
+
+<!-- CHAPTER PAGE -->
+
+<section class="chapter-page" id="chapterPage">
+
+<h1>Chapters</h1>
+
+<div class="chapter" onclick="openTopics()">
+
+Chapter 1 – Introduction
+
+</div>
+
+<div class="chapter" onclick="openTopics()">
+
+Chapter 2 – Basic Concepts
+
+</div>
+
+<div class="chapter" onclick="openTopics()">
+
+Chapter 3 – Practice Problems
+
+</div>
+
+<div class="chapter" onclick="openTopics()">
+
+Chapter 4 – Advanced Concepts
+
+</div>
+
+<div class="chapter" onclick="openTopics()">
+
+Chapter 5 – Final Revision
+
+</div>
+
+</section>
+
+
+
+<!-- TOPIC PAGE -->
+
+<section class="topic-page" id="topicPage">
+
+<h1>Topics</h1>
+
+<div class="topic" onclick="openLesson()">
+
+Topic 1 – Explanation
+
+</div>
+
+<div class="topic" onclick="openLesson()">
+
+Topic 2 – Examples
+
+</div>
+
+<div class="topic" onclick="openLesson()">
+
+Topic 3 – Practice Questions
+
+</div>
+
+<div class="topic" onclick="openLesson()">
+
+Topic 4 – Important Points
+
+</div>
+
+<div class="topic" onclick="openLesson()">
+
+Topic 5 – Revision
+
+</div>
+
+</section>
+
+
+
+<!-- LESSON PAGE -->
+
+<section class="lesson-page" id="lessonPage">
+
+<h1>Lesson Video</h1>
+
+<video controls>
+
+<source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+
+</video>
+
+<br><br>
+
+<button>Download Notes</button>
+
+<button>Start Quiz</button>
+
+<button>Generate Certificate</button>
+
+</section>
+
+
+
+<!-- TELEGRAM SECTION -->
+
+<section class="telegram">
+
+<h2>Join Our Telegram Channel</h2>
+
+<p>Get free study material and updates</p>
+
+<button>
+
+<i class="fa-brands fa-telegram"></i>
+Join Telegram
+
+</button>
+
+</section>
+
+
+
+<footer>
+
+<p>© 2026 Alpha Verse. All rights reserved.</p>
+
+</footer>
+
+
+
+<!-- LOGIN MODAL -->
+
+<div class="login-modal" id="loginModal">
+
+<div class="login-box">
+
+<h2>Login</h2>
+
+<input type="email" placeholder="Enter Email">
+
+<input type="password" placeholder="Enter Password">
+
+<button>Login</button>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+/* SCROLL */
+
+function scrollCourses(){
+
+document.getElementById("courses").scrollIntoView({
+behavior:"smooth"
+})
+
+}
+
+
+/* LOGIN */
+
+function openLogin(){
+
+document.getElementById("loginModal").style.display="flex"
+
+}
+
+
+/* BATCH */
+
+function openBatch(){
+
+document.getElementById("batchPage").style.display="block"
+
+window.scrollTo({
+top:document.getElementById("batchPage").offsetTop,
+behavior:"smooth"
+})
+
+}
+
+
+/* SUBJECT */
+
+function openSubjects(){
+
+document.getElementById("subjectPage").style.display="block"
+
+window.scrollTo({
+top:document.getElementById("subjectPage").offsetTop,
+behavior:"smooth"
+})
+
+}
+
+
+/* CHAPTER */
+
+function openChapters(){
+
+document.getElementById("chapterPage").style.display="block"
+
+window.scrollTo({
+top:document.getElementById("chapterPage").offsetTop,
+behavior:"smooth"
+})
+
+}
+
+
+/* TOPIC */
+
+function openTopics(){
+
+document.getElementById("topicPage").style.display="block"
+
+window.scrollTo({
+top:document.getElementById("topicPage").offsetTop,
+behavior:"smooth"
+})
+
+}
+
+
+/* LESSON */
+
+function openLesson(){
+
+document.getElementById("lessonPage").style.display="block"
+
+window.scrollTo({
+top:document.getElementById("lessonPage").offsetTop,
+behavior:"smooth"
+})
+
+}
+
+</script>
+
+<!-- SOCIAL BAR TOP LEFT -->
+
+<div class="social-bar">
+
+<a href="https://t.me/alphaa_01" target="_blank">
+<i class="fa-brands fa-telegram"></i>
+</a>
+
+<a href="https://www.instagram.com/ii___adarsh__ii/?hl=en" target="_blank">
+<i class="fa-brands fa-instagram"></i>
+</a>
+
+<a href="https://wa.me/917347026410" target="_blank">
+<i class="fa-brands fa-whatsapp"></i>
+</a>
+
+</div>
+
+
+
+<style>
+
+/* SOCIAL BAR */
+
+.social-bar{
+
+position:fixed;
+
+top:10px;
+
+left:10px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:10px;
+
+z-index:1000;
+
+}
+
+.social-bar a{
+
+background:#111;
+
+color:white;
+
+padding:10px;
+
+border-radius:50%;
+
+font-size:18px;
+
+}
+
+
+
+/* DARK MODE */
+
+.dark-mode{
+
+background:#111;
+
+color:white;
+
+}
+
+.dark-mode .course{
+
+background:#1e1e1e;
+
+}
+
+.dark-mode header{
+
+background:#000;
+
+}
+
+
+
+/* DARK MODE BUTTON */
+
+.dark-toggle{
+
+position:fixed;
+
+bottom:20px;
+
+right:20px;
+
+background:#6a5acd;
+
+color:white;
+
+border:none;
+
+padding:12px 20px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+z-index:1000;
+
+}
+
+
+
+/* ADMIN PANEL */
+
+.admin-panel{
+
+display:none;
+
+padding:60px;
+
+background:#f4f6fb;
+
+}
+
+.admin-panel h2{
+
+margin-bottom:20px;
+
+}
+
+.upload-box{
+
+background:white;
+
+padding:25px;
+
+border-radius:10px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+max-width:500px;
+
+margin:auto;
+
+}
+
+.upload-box input{
+
+width:100%;
+
+padding:10px;
+
+margin:10px 0;
+
+}
+
+.upload-box button{
+
+padding:10px 20px;
+
+background:#6a5acd;
+
+border:none;
+
+color:white;
+
+border-radius:5px;
+
+}
+
+
+
+/* DASHBOARD */
+
+.dashboard{
+
+display:none;
+
+padding:60px;
+
+}
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+gap:20px;
+
+}
+
+.dashboard-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:10px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+text-align:center;
+
+}
+
+
+
+/* QUIZ */
+
+.quiz-page{
+
+display:none;
+
+padding:60px;
+
+}
+
+.quiz-question{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:6px;
+
+}
+
+.quiz-question button{
+
+display:block;
+
+margin:6px 0;
+
+}
+
+
+
+/* CERTIFICATE */
+
+.certificate{
+
+display:none;
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.certificate-box{
+
+background:white;
+
+padding:40px;
+
+border:5px solid #6a5acd;
+
+border-radius:10px;
+
+}
+
+</style>
+
+
+
+<!-- DARK MODE BUTTON -->
+
+<button class="dark-toggle" onclick="toggleDarkMode()">
+
+Toggle Dark Mode
+
+</button>
+
+
+
+<!-- ADMIN PANEL -->
+
+<section class="admin-panel" id="adminPanel">
+
+<h2>Admin Course Upload</h2>
+
+<div class="upload-box">
+
+<input type="text" placeholder="Course Title">
+
+<input type="text" placeholder="Subject Name">
+
+<input type="text" placeholder="Chapter Name">
+
+<input type="text" placeholder="Topic Name">
+
+<input type="text" placeholder="Video URL">
+
+<button>Upload Course</button>
+
+</div>
+
+</section>
+
+
+
+<!-- DASHBOARD -->
+
+<section class="dashboard" id="dashboard">
+
+<h2>Student Dashboard</h2>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+
+<h3>My Courses</h3>
+
+<p>7 Courses Enrolled</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>Progress</h3>
+
+<p>68% Completed</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>Tests</h3>
+
+<p>5 Tests Taken</p>
+
+</div>
+
+<div class="dashboard-card">
+
+<h3>Certificates</h3>
+
+<p>2 Earned</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- QUIZ PAGE -->
+
+<section class="quiz-page" id="quizPage">
+
+<h2>Chapter Quiz</h2>
+
+<div class="quiz-question">
+
+<p>What is 2 + 2 ?</p>
+
+<button>3</button>
+
+<button>4</button>
+
+<button>5</button>
+
+<button>6</button>
+
+</div>
+
+<div class="quiz-question">
+
+<p>Speed formula?</p>
+
+<button>D/T</button>
+
+<button>T/D</button>
+
+<button>D+T</button>
+
+<button>D-T</button>
+
+</div>
+
+</section>
+
+
+
+<!-- CERTIFICATE -->
+
+<section class="certificate" id="certificatePage">
+
+<div class="certificate-box">
+
+<h1>Certificate of Completion</h1>
+
+<p>This certifies that</p>
+
+<h2>Student Name</h2>
+
+<p>has completed the course</p>
+
+<h3>Alpha Verse</h3>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+/* DARK MODE */
+
+function toggleDarkMode(){
+
+document.body.classList.toggle("dark-mode")
+
+}
+
+
+
+/* OPEN DASHBOARD */
+
+function openDashboard(){
+
+document.getElementById("dashboard").style.display="block"
+
+window.scrollTo({
+
+top:document.getElementById("dashboard").offsetTop,
+
+behavior:"smooth"
+
+})
+
+}
+
+
+
+/* OPEN QUIZ */
+
+function openQuiz(){
+
+document.getElementById("quizPage").style.display="block"
+
+}
+
+
+
+/* OPEN CERTIFICATE */
+
+function openCertificate(){
+
+document.getElementById("certificatePage").style.display="block"
+
+}
+
+
+
+/* ADMIN LOGIN */
+
+function openAdmin(){
+
+document.getElementById("adminPanel").style.display="block"
+
+}
+
+ <!-- PAGE LOADER -->
+
+<div id="pageLoader">
+
+<div class="loader"></div>
+
+</div>
+
+
+
+<style>
+
+/* PAGE LOADER */
+
+#pageLoader{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:white;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:2000;
+
+}
+
+.loader{
+
+width:60px;
+
+height:60px;
+
+border:6px solid #ddd;
+
+border-top:6px solid #6a5acd;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+0%{transform:rotate(0)}
+
+100%{transform:rotate(360deg)}
+
+}
+
+
+
+/* SEARCH BAR */
+
+.search-section{
+
+padding:40px;
+
+text-align:center;
+
+}
+
+.search-section input{
+
+width:60%;
+
+padding:12px;
+
+border-radius:5px;
+
+border:1px solid #ccc;
+
+}
+
+
+
+/* NOTES SECTION */
+
+.notes-section{
+
+padding:60px;
+
+}
+
+.note-card{
+
+background:white;
+
+padding:20px;
+
+margin:10px;
+
+border-radius:6px;
+
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+
+}
+
+.note-card button{
+
+padding:8px 15px;
+
+background:#6a5acd;
+
+color:white;
+
+border:none;
+
+border-radius:4px;
+
+}
+
+
+
+/* DOUBT SECTION */
+
+.doubt-section{
+
+padding:60px;
+
+background:#f7f9ff;
+
+}
+
+.doubt-box{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:6px;
+
+}
+
+.doubt-box textarea{
+
+width:100%;
+
+height:80px;
+
+}
+
+.doubt-box button{
+
+margin-top:10px;
+
+padding:10px 18px;
+
+background:#6a5acd;
+
+border:none;
+
+color:white;
+
+}
+
+
+
+/* HELP BUTTON */
+
+.help-btn{
+
+position:fixed;
+
+bottom:80px;
+
+right:20px;
+
+background:#00c3ff;
+
+color:white;
+
+padding:15px;
+
+border-radius:50%;
+
+font-size:20px;
+
+cursor:pointer;
+
+}
+
+
+
+/* NOTIFICATION */
+
+.notification{
+
+position:fixed;
+
+top:80px;
+
+right:20px;
+
+background:#6a5acd;
+
+color:white;
+
+padding:15px;
+
+border-radius:6px;
+
+display:none;
+
+}
+
+
+
+/* COURSE RATING */
+
+.rating{
+
+margin-top:10px;
+
+}
+
+.rating i{
+
+color:gold;
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+</style>
+
+
+
+<!-- SEARCH SECTION -->
+
+<section class="search-section">
+
+<h2>Search Courses</h2>
+
+<input type="text" placeholder="Search your course...">
+
+</section>
+
+
+
+<!-- NOTES SECTION -->
+
+<section class="notes-section">
+
+<h2>Study Notes</h2>
+
+<div class="note-card">
+
+<h3>Mathematics Chapter 1 Notes</h3>
+
+<p>Complete explanation with solved examples.</p>
+
+<button>Download PDF</button>
+
+</div>
+
+<div class="note-card">
+
+<h3>Science Chapter 2 Notes</h3>
+
+<p>Important theory and diagrams.</p>
+
+<button>Download PDF</button>
+
+</div>
+
+</section>
+
+
+
+<!-- DOUBT SECTION -->
+
+<section class="doubt-section">
+
+<h2>Ask Your Doubt</h2>
+
+<div class="doubt-box">
+
+<textarea placeholder="Write your doubt here..."></textarea>
+
+<br>
+
+<button>Submit Doubt</button>
+
+</div>
+
+</section>
+
+
+
+<!-- COURSE RATING -->
+
+<section style="padding:60px;text-align:center">
+
+<h2>Rate This Course</h2>
+
+<div class="rating">
+
+<i class="fa fa-star"></i>
+
+<i class="fa fa-star"></i>
+
+<i class="fa fa-star"></i>
+
+<i class="fa fa-star"></i>
+
+<i class="fa fa-star"></i>
+
+</div>
+
+</section>
+
+
+
+<!-- NOTIFICATION -->
+
+<div class="notification" id="notify">
+
+New Course Uploaded!
+
+</div>
+
+
+
+<!-- HELP BUTTON -->
+
+<div class="help-btn" onclick="showHelp()">
+
+<i class="fa-solid fa-headset"></i>
+
+</div>
+
+
+
+<script>
+
+/* PAGE LOADER */
+
+window.addEventListener("load",function(){
+
+document.getElementById("pageLoader").style.display="none"
+
+})
+
+
+
+/* HELP BUTTON */
+
+function showHelp(){
+
+alert("Contact Support: alphaverse@gmail.com")
+
+}
+
+
+
+/* NOTIFICATION SYSTEM */
+
+function showNotification(){
+
+var n=document.getElementById("notify")
+
+n.style.display="block"
+
+setTimeout(function(){
+
+n.style.display="none"
+
+},3000)
+
+}
+
+
+
+/* COURSE RATING */
+
+document.querySelectorAll(".rating i").forEach(function(star,index){
+
+star.addEventListener("click",function(){
+
+alert("You rated "+(index+1)+" stars")
+
+})
+
+})
+<!-- STUDENT AUTH SYSTEM -->
+
+<section id="registerPage" style="display:none;padding:60px;text-align:center">
+
+<h2>Create Account</h2>
+
+<input id="regName" placeholder="Name" style="padding:10px;margin:5px">
+
+<input id="regEmail" placeholder="Email" style="padding:10px;margin:5px">
+
+<input id="regPass" type="password" placeholder="Password" style="padding:10px;margin:5px">
+
+<br><br>
+
+<button onclick="registerUser()">Register</button>
+
+</section>
+
+
+
+<section id="profilePage" style="display:none;padding:60px;text-align:center">
+
+<h2>Student Profile</h2>
+
+<p id="profileName"></p>
+
+<p id="profileEmail"></p>
+
+<button onclick="logoutUser()">Logout</button>
+
+</section>
+
+
+
+<style>
+
+/* PROFILE PAGE */
+
+#profilePage{
+
+background:#f7f9ff;
+
+}
+
+#profilePage p{
+
+font-size:18px;
+
+}
+
+
+
+/* BOOKMARK BUTTON */
+
+.bookmark-btn{
+
+background:#ff9800;
+
+color:white;
+
+border:none;
+
+padding:10px 15px;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+
+
+/* LEADERBOARD */
+
+.leaderboard{
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.leaderboard table{
+
+margin:auto;
+
+border-collapse:collapse;
+
+}
+
+.leaderboard td,th{
+
+padding:10px 20px;
+
+border:1px solid #ddd;
+
+}
+
+</style>
+
+
+
+<!-- BOOKMARK LESSON -->
+
+<div style="text-align:center;margin-top:20px">
+
+<button class="bookmark-btn" onclick="bookmarkLesson()">
+
+Bookmark Lesson
+
+</button>
+
+</div>
+
+
+
+<!-- LEADERBOARD -->
+
+<section class="leaderboard">
+
+<h2>Top Students</h2>
+
+<table>
+
+<tr>
+
+<th>Rank</th>
+
+<th>Name</th>
+
+<th>Points</th>
+
+</tr>
+
+<tr>
+
+<td>1</td>
+
+<td>Rahul</td>
+
+<td>980</td>
+
+</tr>
+
+<tr>
+
+<td>2</td>
+
+<td>Ankit</td>
+
+<td>920</td>
+
+</tr>
+
+<tr>
+
+<td>3</td>
+
+<td>Priya</td>
+
+<td>870</td>
+
+</tr>
+
+</table>
+
+</section>
+
+
+
+<script>
+
+/* REGISTER USER */
+
+function registerUser(){
+
+let name=document.getElementById("regName").value
+
+let email=document.getElementById("regEmail").value
+
+let pass=document.getElementById("regPass").value
+
+
+
+let user={name,email,pass}
+
+
+
+localStorage.setItem("alphaUser",JSON.stringify(user))
+
+
+
+alert("Account Created Successfully")
+
+}
+
+
+
+/* LOGIN USER */
+
+function loginUser(){
+
+let email=document.querySelector(".login-box input[type=email]").value
+
+let pass=document.querySelector(".login-box input[type=password]").value
+
+
+
+let saved=JSON.parse(localStorage.getItem("alphaUser"))
+
+
+
+if(saved && email===saved.email && pass===saved.pass){
+
+alert("Login Successful")
+
+
+
+document.getElementById("profileName").innerText="Name: "+saved.name
+
+document.getElementById("profileEmail").innerText="Email: "+saved.email
+
+
+
+document.getElementById("profilePage").style.display="block"
+
+
+
+}else{
+
+alert("Invalid Login")
+
+}
+
+}
+
+
+
+/* LOGOUT */
+
+function logoutUser(){
+
+localStorage.removeItem("alphaUser")
+
+location.reload()
+
+}
+
+
+
+/* BOOKMARK LESSON */
+
+function bookmarkLesson(){
+
+let bookmarks=JSON.parse(localStorage.getItem("bookmarks")) || []
+
+bookmarks.push("Lesson Saved")
+
+localStorage.setItem("bookmarks",JSON.stringify(bookmarks))
+
+alert("Lesson Bookmarked")
+
+}
+
+
+
+/* PROGRESS TRACKER */
+
+function saveProgress(course){
+
+localStorage.setItem("progress_"+course,"completed")
+
+}
+
+
+
+/* VIDEO AUTO PROGRESS */
+
+let vid=document.querySelector("video")
+
+if(vid){
+
+vid.addEventListener("ended",function(){
+
+saveProgress("course1")
+
+alert("Lesson Completed")
+
+})
+
+}
+
+<!-- ANNOUNCEMENT BAR -->
+
+<div class="announcement">
+
+🔥 New Batch Starting Soon – Join Now!
+
+</div>
+
+
+
+<style>
+
+/* ANNOUNCEMENT */
+
+.announcement{
+
+background:#ff5722;
+
+color:white;
+
+text-align:center;
+
+padding:10px;
+
+font-weight:bold;
+
+}
+
+
+
+/* NETFLIX COURSE PLAYER */
+
+.player-container{
+
+padding:60px;
+
+background:#000;
+
+color:white;
+
+text-align:center;
+
+}
+
+.player-container video{
+
+width:90%;
+
+border-radius:10px;
+
+}
+
+
+
+/* WISHLIST */
+
+.wishlist-btn{
+
+background:#e91e63;
+
+color:white;
+
+border:none;
+
+padding:10px 20px;
+
+border-radius:5px;
+
+cursor:pointer;
+
+}
+
+
+
+/* ADMIN DASHBOARD */
+
+.admin-dashboard{
+
+display:none;
+
+padding:60px;
+
+background:#f4f6fb;
+
+}
+
+.admin-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+gap:20px;
+
+}
+
+.admin-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:10px;
+
+text-align:center;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+
+
+/* COURSE CREATOR */
+
+.course-creator{
+
+margin-top:40px;
+
+background:white;
+
+padding:30px;
+
+border-radius:10px;
+
+max-width:500px;
+
+}
+
+.course-creator input{
+
+width:100%;
+
+padding:10px;
+
+margin:8px 0;
+
+}
+
+
+
+/* ANALYTICS */
+
+.analytics{
+
+padding:60px;
+
+}
+
+.analytics-box{
+
+background:white;
+
+padding:20px;
+
+margin:10px;
+
+border-radius:6px;
+
+}
+
+
+
+/* PAYMENT */
+
+.payment-section{
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.pay-btn{
+
+background:#4caf50;
+
+color:white;
+
+padding:12px 25px;
+
+border:none;
+
+border-radius:6px;
+
+cursor:pointer;
+
+}
+
+
+
+/* MOBILE NAV */
+
+.mobile-nav{
+
+position:fixed;
+
+bottom:0;
+
+left:0;
+
+width:100%;
+
+background:#111;
+
+display:flex;
+
+justify-content:space-around;
+
+padding:10px;
+
+}
+
+.mobile-nav i{
+
+color:white;
+
+font-size:22px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+
+
+<!-- NETFLIX STYLE VIDEO PLAYER -->
+
+<section class="player-container">
+
+<h2>Course Video Player</h2>
+
+<video controls>
+
+<source src="https://www.w3schools.com/html/mov_bbb.mp4">
+
+</video>
+
+<br><br>
+
+<button class="wishlist-btn" onclick="addWishlist()">
+
+Add To Wishlist
+
+</button>
+
+</section>
+
+
+
+<!-- ADMIN DASHBOARD -->
+
+<section class="admin-dashboard" id="adminDash">
+
+<h2>Admin Dashboard</h2>
+
+<div class="admin-grid">
+
+<div class="admin-card">
+
+<h3>Total Students</h3>
+
+<p id="totalStudents">120</p>
+
+</div>
+
+<div class="admin-card">
+
+<h3>Total Courses</h3>
+
+<p>7</p>
+
+</div>
+
+<div class="admin-card">
+
+<h3>Total Revenue</h3>
+
+<p>₹45,000</p>
+
+</div>
+
+</div>
+
+
+
+<!-- COURSE CREATOR -->
+
+<div class="course-creator">
+
+<h3>Create New Course</h3>
+
+<input placeholder="Course Title">
+
+<input placeholder="Subject Name">
+
+<input placeholder="Chapter Name">
+
+<input placeholder="Topic Name">
+
+<input placeholder="Video URL">
+
+<button>Create Course</button>
+
+</div>
+
+</section>
+
+
+
+<!-- STUDENT ANALYTICS -->
+
+<section class="analytics">
+
+<h2>Student Analytics</h2>
+
+<div class="analytics-box">
+
+Students Online: 25
+
+</div>
+
+<div class="analytics-box">
+
+Videos Watched Today: 130
+
+</div>
+
+<div class="analytics-box">
+
+Assignments Submitted: 54
+
+</div>
+
+</section>
+
+
+
+<!-- PAYMENT UI -->
+
+<section class="payment-section">
+
+<h2>Unlock Premium Course</h2>
+
+<p>Get full access to all lessons</p>
+
+<button class="pay-btn">
+
+Pay ₹499
+
+</button>
+
+</section>
+
+
+
+<!-- MOBILE APP NAVIGATION -->
+
+<div class="mobile-nav">
+
+<i class="fa fa-home"></i>
+
+<i class="fa fa-book"></i>
+
+<i class="fa fa-play"></i>
+
+<i class="fa fa-user"></i>
+
+</div>
+
+
+
+<script>
+
+/* WISHLIST */
+
+function addWishlist(){
+
+let wish=JSON.parse(localStorage.getItem("wishlist"))||[]
+
+wish.push("course")
+
+localStorage.setItem("wishlist",JSON.stringify(wish))
+
+alert("Course Added To Wishlist")
+
+}
+
+
+
+/* ADMIN DASHBOARD OPEN */
+
+function openAdminDashboard(){
+
+document.getElementById("adminDash").style.display="block"
+
+window.scrollTo({
+
+top:document.getElementById("adminDash").offsetTop,
+
+behavior:"smooth"
+
+})
+
+}
+
+
+
+/* STUDENT ANALYTICS RANDOM */
+
+setInterval(function(){
+
+let online=Math.floor(Math.random()*50)
+
+document.querySelector(".analytics-box").innerText=
+
+"Students Online: "+online
+
+},5000)
+
+<!-- LIVE CLASSES -->
+
+<section class="live-classes">
+
+<h2>Live Classes</h2>
+
+<div class="live-card">
+
+<h3>Physics Live Class</h3>
+
+<p>Starts at 7:00 PM</p>
+
+<button onclick="joinLive()">Join Class</button>
+
+</div>
+
+<div class="live-card">
+
+<h3>Mathematics Live Class</h3>
+
+<p>Starts at 8:30 PM</p>
+
+<button onclick="joinLive()">Join Class</button>
+
+</div>
+
+</section>
+
+
+
+<style>
+
+/* LIVE CLASSES */
+
+.live-classes{
+
+padding:60px;
+
+background:#f4f6fb;
+
+}
+
+.live-card{
+
+background:white;
+
+padding:25px;
+
+margin:15px;
+
+border-radius:10px;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+
+}
+
+
+
+/* ASSIGNMENT */
+
+.assignment-section{
+
+padding:60px;
+
+}
+
+.assignment-box{
+
+background:white;
+
+padding:25px;
+
+border-radius:10px;
+
+max-width:500px;
+
+}
+
+.assignment-box input{
+
+margin:10px 0;
+
+}
+
+
+
+/* FORUM */
+
+.forum{
+
+padding:60px;
+
+background:#f7f9ff;
+
+}
+
+.post{
+
+background:white;
+
+padding:20px;
+
+margin-bottom:15px;
+
+border-radius:6px;
+
+}
+
+
+
+/* PROGRESS BAR */
+
+.progress-container{
+
+width:80%;
+
+margin:auto;
+
+background:#ddd;
+
+border-radius:10px;
+
+overflow:hidden;
+
+}
+
+.progress-bar{
+
+height:20px;
+
+background:#4caf50;
+
+width:45%;
+
+}
+
+
+
+/* DOWNLOAD CENTER */
+
+.download-center{
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.download-card{
+
+background:white;
+
+padding:20px;
+
+margin:10px;
+
+border-radius:6px;
+
+display:inline-block;
+
+}
+
+
+
+/* INSTRUCTORS */
+
+.instructors{
+
+padding:60px;
+
+background:#f4f6fb;
+
+text-align:center;
+
+}
+
+.teacher{
+
+display:inline-block;
+
+background:white;
+
+padding:20px;
+
+margin:10px;
+
+border-radius:10px;
+
+width:200px;
+
+}
+
+
+
+/* FEEDBACK */
+
+.feedback{
+
+padding:60px;
+
+text-align:center;
+
+}
+
+.feedback textarea{
+
+width:60%;
+
+height:100px;
+
+}
+
+</style>
+
+
+
+<!-- ASSIGNMENT UPLOAD -->
+
+<section class="assignment-section">
+
+<h2>Submit Assignment</h2>
+
+<div class="assignment-box">
+
+<input type="file">
+
+<br>
+
+<button onclick="submitAssignment()">Submit Assignment</button>
+
+</div>
+
+</section>
+
+
+
+<!-- DISCUSSION FORUM -->
+
+<section class="forum">
+
+<h2>Student Discussion Forum</h2>
+
+<div class="post">
+
+<p><b>Rahul:</b> Can someone explain chapter 2?</p>
+
+</div>
+
+<div class="post">
+
+<p><b>Priya:</b> Yes check the lecture video.</p>
+
+</div>
+
+</section>
+
+
+
+<!-- COURSE PROGRESS -->
+
+<section style="padding:60px;text-align:center">
+
+<h2>Your Course Progress</h2>
+
+<div class="progress-container">
+
+<div class="progress-bar"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- DOWNLOAD CENTER -->
+
+<section class="download-center">
+
+<h2>Download Center</h2>
+
+<div class="download-card">
+
+<p>Mathematics Notes</p>
+
+<button>Download</button>
+
+</div>
+
+<div class="download-card">
+
+<p>Physics Formula Sheet</p>
+
+<button>Download</button>
+
+</div>
+
+</section>
+
+
+
+<!-- INSTRUCTORS -->
+
+<section class="instructors">
+
+<h2>Our Teachers</h2>
+
+<div class="teacher">
+
+<h3>Mr. Sharma</h3>
+
+<p>Physics Expert</p>
+
+</div>
+
+<div class="teacher">
+
+<h3>Ms. Gupta</h3>
+
+<p>Maths Faculty</p>
+
+</div>
+
+<div class="teacher">
+
+<h3>Mr. Verma</h3>
+
+<p>Chemistry Teacher</p>
+
+</div>
+
+</section>
+
+
+
+<!-- FEEDBACK -->
+
+<section class="feedback">
+
+<h2>Student Feedback</h2>
+
+<textarea placeholder="Write your feedback"></textarea>
+
+<br><br>
+
+<button onclick="sendFeedback()">Submit Feedback</button>
+
+</section>
+
+
+
+<script>
+
+/* LIVE CLASS */
+
+function joinLive(){
+
+alert("Redirecting to Live Class")
+
+}
+
+
+
+/* ASSIGNMENT */
+
+function submitAssignment(){
+
+alert("Assignment Submitted Successfully")
+
+}
+
+
+
+/* FEEDBACK */
+
+function sendFeedback(){
+
+alert("Thank you for your feedback")
+
+}  
+  
+</script>  
+   
+</body>
+
+</html>
